@@ -1,0 +1,220 @@
+[
+    {
+        "label": "pika",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pika",
+        "description": "pika",
+        "detail": "pika",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "mysql.connector",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "threading",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "threading",
+        "description": "threading",
+        "detail": "threading",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "connection",
+        "kind": 5,
+        "importPath": "node-server-6900.try",
+        "description": "node-server-6900.try",
+        "peekOfCode": "connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))\nchannel = connection.channel()\nchannel.queue_purge(queue='book_queue')\nconnection.close()\nprint(\"Queue has been purged\")",
+        "detail": "node-server-6900.try",
+        "documentation": {}
+    },
+    {
+        "label": "channel",
+        "kind": 5,
+        "importPath": "node-server-6900.try",
+        "description": "node-server-6900.try",
+        "peekOfCode": "channel = connection.channel()\nchannel.queue_purge(queue='book_queue')\nconnection.close()\nprint(\"Queue has been purged\")",
+        "detail": "node-server-6900.try",
+        "documentation": {}
+    },
+    {
+        "label": "consume_from_queue",
+        "kind": 2,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "def consume_from_queue():\n    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))\n    channel = connection.channel()\n    channel.queue_declare(queue='user_queue', durable=True)\n    def callback(ch, method, properties, body):\n        global userId\n        user_id = body.decode('utf-8')\n        print(f\"Received userId: {user_id}\")\n        with app.app_context():\n            with open(r'C:\\Users\\kotad\\OneDrive\\Desktop\\map\\python\\a.txt', 'a+') as f:",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "send_to_queue",
+        "kind": 2,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "def send_to_queue(user_id, train_id):\n    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))\n    channel = connection.channel()\n    channel.queue_declare(queue='book_queue', durable=True)\n    message = {\"userId\": user_id, \"trainId\": train_id}\n    channel.basic_publish(\n        exchange='',\n        routing_key='book_queue',\n        body=str(message)\n    )",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "def home():\n    return render_template('home.html')\n@app.route('/search_trains_form', methods=['GET'])\ndef search_trains_form():\n    return '''\n    <form action=\"/search_trains\" method=\"get\">\n        <label for=\"Source\">Source:</label>\n        <input type=\"text\" id=\"Source\" name=\"Source\" required><br><br>\n        <label for=\"Destination\">Destination:</label>\n        <input type=\"text\" id=\"Destination\" name=\"Destination\" required><br><br>",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "search_trains_form",
+        "kind": 2,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "def search_trains_form():\n    return '''\n    <form action=\"/search_trains\" method=\"get\">\n        <label for=\"Source\">Source:</label>\n        <input type=\"text\" id=\"Source\" name=\"Source\" required><br><br>\n        <label for=\"Destination\">Destination:</label>\n        <input type=\"text\" id=\"Destination\" name=\"Destination\" required><br><br>\n        <input type=\"submit\" value=\"Search Trains\">\n    </form>\n    '''",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "get_trains",
+        "kind": 2,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "def get_trains():\n    try:\n        cr.execute(\"SELECT * FROM trains;\")\n        trains = cr.fetchall()      \n        for train in trains:\n            for key, value in train.items():\n                if isinstance(value, (datetime.timedelta, datetime.datetime)):\n                    train[key] = str(value)\n        # Render the template and pass the trains data\n        return render_template('show_trains.html', trains=trains)",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "search_trains",
+        "kind": 2,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "def search_trains():\n    source = request.args.get('Source')\n    destination = request.args.get('Destination')\n    if not source or not destination:\n        return render_template('search_trains.html', error='Source and destination are required')\n    try:\n        cr.execute(\"SELECT * FROM Trains WHERE Source = %s AND Destination = %s\", (source, destination))\n        trains = cr.fetchall()\n        print(trains)\n        # Format date and time fields to strings if needed",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "insert_train",
+        "kind": 2,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "def insert_train():\n    try:\n        data = request.json\n        prn_no = data.get('prn_no')\n        name = data.get('Name')\n        source = data.get('Source')\n        destination = data.get('Destination')\n        arrival = data.get('Arrival')\n        price = data.get('Price')\n        query = \"INSERT INTO Trains (prn_no, Name, Source, Destination, Arrival, Price) VALUES (%s, %s, %s, %s, %s, %s)\"",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "book_train",
+        "kind": 2,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "def book_train():\n    try:\n        train_id = request.form.get('trainId')\n        with open(r'C:\\Users\\kotad\\OneDrive\\Desktop\\map\\python\\a.txt', 'r') as f:\n            userId = f.readline()\n            print(userId)\n        send_to_queue(userId[-1], train_id)\n        return jsonify({'message': 'Booking request sent successfully!'}), 200\n    except Exception as e:\n        return jsonify({'error': str(e)}), 500",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "app = Flask(__name__)\n# Database connection\ndbr = mysql.connector.connect(\n    host='localhost',\n    user='root',\n    database='MAP',\n    password='2003'\n)\ncr = dbr.cursor(dictionary=True)\ndef consume_from_queue():",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "dbr",
+        "kind": 5,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "dbr = mysql.connector.connect(\n    host='localhost',\n    user='root',\n    database='MAP',\n    password='2003'\n)\ncr = dbr.cursor(dictionary=True)\ndef consume_from_queue():\n    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))\n    channel = connection.channel()",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "cr",
+        "kind": 5,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "cr = dbr.cursor(dictionary=True)\ndef consume_from_queue():\n    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))\n    channel = connection.channel()\n    channel.queue_declare(queue='user_queue', durable=True)\n    def callback(ch, method, properties, body):\n        global userId\n        user_id = body.decode('utf-8')\n        print(f\"Received userId: {user_id}\")\n        with app.app_context():",
+        "detail": "python.app",
+        "documentation": {}
+    },
+    {
+        "label": "consumer_thread",
+        "kind": 5,
+        "importPath": "python.app",
+        "description": "python.app",
+        "peekOfCode": "consumer_thread = threading.Thread(target=consume_from_queue)\nconsumer_thread.start()\n@app.route('/home', methods=['GET'])\ndef home():\n    return render_template('home.html')\n@app.route('/search_trains_form', methods=['GET'])\ndef search_trains_form():\n    return '''\n    <form action=\"/search_trains\" method=\"get\">\n        <label for=\"Source\">Source:</label>",
+        "detail": "python.app",
+        "documentation": {}
+    }
+]

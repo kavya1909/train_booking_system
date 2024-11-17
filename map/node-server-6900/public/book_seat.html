@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Seat</title>
+</head>
+<body>
+    <h1>Book a Seat</h1>
+    <label for="seatNumber">Seat Number:</label>
+    <input type="number" id="seatNumber" min="1">
+    <button onclick="bookSeat()">Book Seat</button>
+    <p id="message"></p>
+
+    <script>
+        async function bookSeat() {
+            const seatNumber = document.getElementById('seatNumber').value;
+            
+            const response = await fetch('/book', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ seatNumber: parseInt(seatNumber) })
+            });
+
+            const data = await response.json();
+            document.getElementById('message').textContent = data.message || data.error;
+        }
+    </script>
+</body>
+</html>

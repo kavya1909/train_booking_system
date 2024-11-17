@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Train Search Results</title>
+</head>
+<body>
+    <h1>Train Search Results</h1>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% elif message %}
+        <p>{{ message }}</p>
+    {% else %}
+        <table border="1">
+            <tr>
+                <th>Train ID</th>
+                <th>Train Name</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Price</th>
+                <th>Arrival Time</th>
+            </tr>
+            {% for train in trains %}
+            <tr>
+                <td>{{ train['prn_no'] }}</td>
+                <td>{{ train['Name'] }}</td>
+                <td>{{ train['Source'] }}</td>
+                <td>{{ train['Destination'] }}</td>
+                <td>{{ train['Price'] }}</td>
+                <td>{{ train['Arrival'] }}</td>
+                <td>
+                    <form action="/book_train" method="POST" style="display:inline;">
+                        <input type="hidden" name="trainId" value="{{ train['prn_no'] }}">
+                        <button type="submit">Book</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>

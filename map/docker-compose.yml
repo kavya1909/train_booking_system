@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  
+  node-server-9000:
+    image: node-server-9000:latest
+    build:
+      context: ./node-server-9000
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+      restart_policy:
+        condition: on-failure
+
+networks:
+  webnet:

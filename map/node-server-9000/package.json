@@ -1,0 +1,22 @@
+{
+  "name": "express-firebase-rabbitmq-app",
+  "version": "1.0.0",
+  "description": "An Express app with Firebase and RabbitMQ integration, using a circuit breaker.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.8.0",
+    "bcrypt": "^5.0.1",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.1.0",
+    "opossum": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "author": "Your Name",
+  "license": "ISC"
+}

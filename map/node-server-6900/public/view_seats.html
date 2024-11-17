@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Seats</title>
+
+    <script>
+        async function loadSeats() {
+            try {
+                const response = await fetch('/seats');
+                const data = await response.json();
+    
+                const seatList = document.getElementById('seatList');
+                seatList.innerHTML = '';
+    
+                if (data.availableSeats && Array.isArray(data.availableSeats)) {
+                    data.availableSeats.forEach(seat => {
+                        const li = document.createElement('li');
+                        li.textContent = `Seat ${seat.seatNumber}: ${seat.available ? 'Available' : 'Booked'}`;
+                        seatList.appendChild(li);
+                    });
+                } else {
+                    seatList.innerHTML = '<li>No seat data available.</li>';
+                }
+            } catch (error) {
+                console.error("Error loading seats:", error);
+                document.getElementById('seatList').innerHTML = '<li>Error loading seats.</li>';
+            }
+        }
+    </script>    
+</head>
+<body>
+    <h1>Available Seats</h1>
+    <button onclick="loadSeats()">Load Seats</button>
+    <ul id="seatList"></ul>
+
+    <script>
+        async function loadSeats() {
+            const response = await fetch('/seats');
+            const data = await response.json();
+
+            const seatList = document.getElementById('seatList');
+            seatList.innerHTML = '';
+
+            data.availableSeats.forEach(seat => {
+                const li = document.createElement('li');
+                li.textContent = `Seat ${seat.seatNumber}: ${seat.available ? 'Available' : 'Booked'}`;
+                seatList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

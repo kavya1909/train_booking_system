@@ -1,0 +1,42 @@
+<!-- templates/show_trains.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Trains</title>
+</head>
+<body>
+    <h1>Available Trains</h1>
+    <div id="trains">
+        {% if trains %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>PRN No</th>
+                        <th>Name</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Arrival</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for train in trains %}
+                    <tr>
+                        <td>{{ train.prn_no }}</td>
+                        <td>{{ train.Name }}</td>
+                        <td>{{ train.Source }}</td>
+                        <td>{{ train.Destination }}</td>
+                        <td>{{ train.Arrival }}</td>
+                        <td>{{ train.Price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No trains available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
